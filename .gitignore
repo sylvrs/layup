@@ -374,7 +374,7 @@ MigrationBackup/
 
 Output
 bin
-obj
+src/**/obj/
 .vs
 x86
 x64
