@@ -2,6 +2,7 @@ namespace Layup.Core.Scenes;
 
 using Layup.API;
 using UnityEngine;
+using FluentResults;
 using MelonLoader;
 public class MainMenu(MelonLogger.Instance logger)
 {
@@ -12,11 +13,24 @@ public class MainMenu(MelonLogger.Instance logger)
 		TUTORIAL_SETTINGS = 2,
 	}
 
+	public API.Screen MainMenuScreen = new(API.Utils.Scenes.MainMenu);
+	public API.Screen? ModsScreen { get; private set; }
 
 	public void OnLoad(UserPreferences prefs)
 	{
 		// Add mods button to bottom middle of menu
 		var modsButtonResult = Button.From(API.Utils.Scenes.MainMenu, templateId: "Quit Button", id: "Mods Button", text: "MODS");
+		var screenResult = API.Screen.CreateFrom(categoryId: "Season/League", templateId: "Season Leaders", name: "Mods Screen");
+		if (screenResult.IsSuccess)
+		{
+			ModsScreen = screenResult.Value;
+			ModsScreen.KeepChildren();
+			ModsScreen.Object.transform.SetParent(MainMenuScreen.Object.transform.parent, false);
+
+			var header = new API.Components.ScrollingHeader(name: "Scrolling Header", text: "MODS MENU");
+			ModsScreen.Add(header);
+			header.Object.SetActive(true);
+		}
 
 		if (modsButtonResult.IsSuccess)
 		{
@@ -46,8 +60,7 @@ public class MainMenu(MelonLogger.Instance logger)
 			}
 
 			button.onClick = new UnityEngine.UI.Button.ButtonClickedEvent();
-			button.onClick.AddListener((UnityEngine.Events.UnityAction)(() => logger.Msg("CLICKED!")));
-
+			button.onClick.AddListener((UnityEngine.Events.UnityAction)(() => OnOpenModsScreen()));
 		}
 
 
@@ -63,4 +76,17 @@ public class MainMenu(MelonLogger.Instance logger)
 
 	}
 
+	public Result OnOpenModsScreen()
+	{
+		var screen = ModsScreen?.Object;
+		if (screen == null)
+		{
+			return Result.Fail("Missing mods screen");
+		}
+
+		MainMenuScreen.Object.SetActive(false);
+		screen.SetActive(true);
+
+		return Result.Ok();
+	}
 }

@@ -6,19 +6,42 @@ using UnityEngine;
 public class Screen(GameObject screenObject)
 {
 	public GameObject Object { get => screenObject; }
+
+
+	public List<Components.IComponent> Components = [];
 	private const string SafeAreaPath = "Canvas/Safe Area";
 
-	public Result KeepChildren(params List<string> childNames)
+	// TODO: wrap our components into this
+	public void KeepChildren(params List<string> childNames)
 	{
-
-		return Result.Ok();
+		for (int i = Object.transform.childCount - 1; i >= 0; i--)
+		{
+			var child = Object.transform.GetChild(i);
+			if (childNames.Contains(child.name))
+			{
+				continue;
+			}
+			child.gameObject.SetActive(false);
+			UnityEngine.Object.Destroy(child.gameObject);
+		}
 	}
-	public static Result<Screen> CreateFrom(string categoryId, string templateId)
+
+	public void Add(Components.IComponent component)
+	{
+		Components.Add(component);
+		component.Object.transform.SetParent(Object.transform, false);
+	}
+	public static Result<Screen> CreateFrom(string categoryId, string templateId, string name)
 	{
 		var screen = GameObject.Find($"{SafeAreaPath}/{categoryId}/{templateId}");
+
+
 		if (screen == null)
 			return Result.Fail($"Unable to locate template at {SafeAreaPath}/{categoryId}/{templateId}");
 
-		return Result.Ok(new Screen(screen));
+		var clone = Utils.Cloning.CreateInactive(screen, screen.transform.parent);
+		clone.name = name;
+
+		return Result.Ok(new Screen(clone));
 	}
 }
