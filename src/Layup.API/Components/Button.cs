@@ -4,10 +4,9 @@ using FluentResults;
 using UnityEngine;
 
 // NOTE: This is NOT the cleanest implementation to do this w/. I'm still experimenting w/ APIs & designs as I explore Unity modding and this specific game
-public class Button(GameObject buttonObject) : IComponent
+public class Button(GameObject gameObject) : Component(gameObject)
 {
-	public GameObject Object { get => buttonObject; }
-	public UnityEngine.UI.Button Component { get => buttonObject.GetComponent<UnityEngine.UI.Button>() ?? throw new InvalidOperationException("Unable to locate button component"); }
+	public UnityEngine.UI.Button Component { get => Object.GetComponent<UnityEngine.UI.Button>() ?? throw new InvalidOperationException("Unable to locate button component"); }
 
 	public void AddClickListener(UnityEngine.Events.UnityAction action)
 	{

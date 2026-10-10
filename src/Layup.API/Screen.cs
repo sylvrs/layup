@@ -7,8 +7,7 @@ public class Screen(GameObject screenObject)
 {
 	public GameObject Object { get => screenObject; }
 
-
-	public List<Components.IComponent> Components = [];
+	public List<Components.Component> Components = [];
 	private const string SafeAreaPath = "Canvas/Safe Area";
 
 	// TODO: wrap our components into this
@@ -26,7 +25,7 @@ public class Screen(GameObject screenObject)
 		}
 	}
 
-	public void Add(Components.IComponent component)
+	public void Add(Components.Component component)
 	{
 		Components.Add(component);
 		component.Object.transform.SetParent(Object.transform, false);
@@ -34,7 +33,7 @@ public class Screen(GameObject screenObject)
 
 	public void ShowAll()
 	{
-		foreach (Components.IComponent component in Components)
+		foreach (Components.Component component in Components)
 		{
 			component.Show();
 		}

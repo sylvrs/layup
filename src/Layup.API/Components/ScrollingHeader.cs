@@ -1,13 +1,10 @@
 namespace Layup.API.Components;
 
 using UnityEngine;
-public class ScrollingHeader : IComponent
+public class ScrollingHeader : Component
 {
-	public GameObject Object { get; }
-
-	public ScrollingHeader(string name, string text)
+	public ScrollingHeader(string name, string text) : base(CreateInstance())
 	{
-		Object = CreateInstance();
 		Object.name = name;
 
 		foreach (var label in Object.GetComponentsInChildren<UnityEngine.UI.Text>(true))

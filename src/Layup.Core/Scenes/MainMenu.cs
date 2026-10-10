@@ -32,7 +32,19 @@ public class MainMenu(MelonLogger.Instance logger)
 			ModsScreen.Add(header);
 
 			var panel = new Panel(name: "Panel", clear: true);
+
+			var viewport = new Viewport(name: "Viewport");
+
+			var testButton = Button.From(API.Utils.Scenes.MainMenu, templateId: "Quit Button", id: "Mods List Button Test 1", text: "LAYUP v0.0.1 - sylvrs");
+			viewport.Add(testButton.Value);
+
+			testButton.Value.Show();
+			viewport.Show();
+
+			panel.Add(viewport);
+
 			ModsScreen.Add(panel);
+
 
 
 			var backButton = Button.Back(id: "Mods - Back Button");

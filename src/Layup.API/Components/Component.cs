@@ -1,12 +1,11 @@
 namespace Layup.API.Components;
 
 using UnityEngine;
-public interface IComponent
+public abstract class Component(GameObject gameObject)
 {
-	GameObject Object { get; }
+	public GameObject Object { get; set; } = gameObject;
 
-	string Name { get => Object.name; }
-
+	public string Name { get => Object.name; }
 
 	public void Show() => Object.SetActive(true);
 	public void Hide() => Object.SetActive(false);
