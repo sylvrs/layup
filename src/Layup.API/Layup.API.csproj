@@ -5,7 +5,12 @@
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<LangVersion>14.0</LangVersion>
+	</PropertyGroup>
+
 	<ItemGroup>
+		<PackageReference Include="FluentResults" Version="4.0.0" />
 		<PackageReference Include="LavaGang.MelonLoader" Version="0.7.3" />
 	</ItemGroup>
 

@@ -7,13 +7,17 @@
 
 	<PropertyGroup>
 		<LangVersion>14.0</LangVersion>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="FluentResults" Version="4.0.0" />
 		<PackageReference Include="LavaGang.MelonLoader" Version="0.7.3" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\Layup.API\Layup.API.csproj" />
+
 		<Reference Include="UnityEngine.CoreModule">
 			<HintPath>$(HoopLandDir)\MelonLoader\Il2CppAssemblies\UnityEngine.CoreModule.dll</HintPath>
 			<Private>false</Private>
