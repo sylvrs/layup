@@ -4,9 +4,15 @@ Layup is a modding platform meant to facilitate modding for the hit game [Hoop L
 
 **NOTE:** Currently, I'm only developing this for Windows _but_ will do my best to make implementations agnostic.
 
+## REQUIREMENTS
+
+- [just](https://just.systems/)
+- dotnet 6.0+ - You can install this using `winget install Microsoft.DotNet.SDK.<VERSION>`
+    * Only .NET 6 / .NET 7 are supported w/ MelonLoader
+
 ## INSTALLATION
 
-TODO!
+To build and install this mod, run the command `just run <INSTALLATION_PATH>`.
 
 ## THANKS TO
 
