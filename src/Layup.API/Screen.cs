@@ -31,6 +31,14 @@ public class Screen(GameObject screenObject)
 		Components.Add(component);
 		component.Object.transform.SetParent(Object.transform, false);
 	}
+
+	public void ShowAll()
+	{
+		foreach (Components.IComponent component in Components)
+		{
+			component.Show();
+		}
+	}
 	public static Result<Screen> CreateFrom(string categoryId, string templateId, string name)
 	{
 		var screen = GameObject.Find($"{SafeAreaPath}/{categoryId}/{templateId}");

@@ -5,11 +5,6 @@ public class ScrollingHeader : IComponent
 {
 	public GameObject Object { get; }
 
-	public string Name
-	{
-		get => Object.name;
-	}
-
 	public ScrollingHeader(string name, string text)
 	{
 		Object = CreateInstance();
