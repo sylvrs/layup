@@ -12,7 +12,7 @@ Layup is a modding platform meant to facilitate modding for the hit game [Hoop L
 
 ## INSTALLATION
 
-To build and install this mod, run the command `just run <INSTALLATION_PATH>`.
+To build and install this mod, run the command `just run <INSTALLATION_PATH>` (This should be the `Mods/` folder inside of Hoop Land).
 
 ## THANKS TO
 
