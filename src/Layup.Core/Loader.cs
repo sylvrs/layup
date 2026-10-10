@@ -1,4 +1,5 @@
-﻿using MelonLoader;
+﻿using UnityEngine;
+using MelonLoader;
 
 [assembly: MelonInfo(typeof(Layup.Core.Loader), "Layup", "1.0.0", "sylvrs", null)]
 [assembly: MelonGame("Koality Game", "Hoop Land")]
@@ -10,6 +11,15 @@ public class Loader : MelonMod
 	public override void OnSceneWasLoaded(int buildIndex, string sceneName)
 	{
 		LoggerInstance.Msg($"Scene {sceneName} with build index {buildIndex} has been loaded!");
+	}
+
+	public override void OnGUI()
+	{
+		if (GUI.Button(
+			new Rect(20, 20, 150, 40), "Test"))
+		{
+			LoggerInstance.Msg("Clicked!");
+		}
 	}
 
 }

@@ -1,13 +1,13 @@
-# TODO: make this agnostic?
 [windows]
 set shell := ["powershell.exe", "-NoLogo", "-Command"]
 
-build:
-	dotnet build -c Release 
+build game_dir:
+	dotnet build -c Release  "-p:HoopLandDir={{game_dir}}"
 
-install path:
-	cp "src/Layup.Core/bin/Release/net6.0/Layup.Core.dll"  "{{path}}"
+install game_dir:
+	cp "src/Layup.API/bin/Release/net6.0/Layup.API.dll"  "{{game_dir}}/UserLibs"
+	cp "src/Layup.Core/bin/Release/net6.0/Layup.Core.dll"  "{{game_dir}}/Mods"
 
 
-run path: build (install path)
+run game_dir: (build game_dir) (install game_dir)
 

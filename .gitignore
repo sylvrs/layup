@@ -386,3 +386,5 @@ x64
 *.o
 *.obj
 *.kate-swp
+
+Directory.Build.props

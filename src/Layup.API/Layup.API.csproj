@@ -1,13 +1,38 @@
 <Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="LavaGang.MelonLoader" Version="0.7.3" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="LavaGang.MelonLoader" Version="0.7.3" />
-  </ItemGroup>
+	<ItemGroup>
+		<Reference Include="UnityEngine.CoreModule">
+			<HintPath>$(HoopLandDir)\MelonLoader\Il2CppAssemblies\UnityEngine.CoreModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
 
+		<Reference Include="UnityEngine.IMGUIModule">
+			<HintPath>$(HoopLandDir)\MelonLoader\Il2CppAssemblies\UnityEngine.IMGUIModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+
+		<Reference Include="Il2Cppmscorlib">
+			<HintPath>$(HoopLandDir)\MelonLoader\Il2CppAssemblies\Il2Cppmscorlib.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+
+		<Reference Include="Il2CppInterop.Common">
+			<HintPath>$(HoopLandDir)\MelonLoader\net6\Il2CppInterop.Common.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+
+		<Reference Include="Il2CppInterop.Runtime">
+			<HintPath>$(HoopLandDir)\MelonLoader\net6\Il2CppInterop.Runtime.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+	</ItemGroup>
 </Project>
