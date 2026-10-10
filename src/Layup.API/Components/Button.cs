@@ -7,6 +7,19 @@ using UnityEngine;
 public class Button(GameObject gameObject) : Component(gameObject)
 {
 	public UnityEngine.UI.Button Component { get => Object.GetComponent<UnityEngine.UI.Button>() ?? throw new InvalidOperationException("Unable to locate button component"); }
+	public float Height
+	{
+		get => Object.GetComponent<RectTransform>().rect.height;
+		set
+		{
+			Object.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, value);
+			var layout = Object.GetComponent<UnityEngine.UI.LayoutElement>() ?? Object.AddComponent<UnityEngine.UI.LayoutElement>();
+			layout.ignoreLayout = false;
+			layout.minHeight = value;
+			layout.preferredHeight = value;
+			layout.flexibleHeight = 0f;
+		}
+	}
 
 	public void AddClickListener(UnityEngine.Events.UnityAction action)
 	{

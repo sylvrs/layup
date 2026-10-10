@@ -6,6 +6,21 @@ using FluentResults;
 using MelonLoader;
 public class MainMenu(MelonLogger.Instance logger)
 {
+	private static readonly API.Styles.TextStyle ModTitleStyle = new()
+	{
+		FontSize = 7,
+		Height = 8f,
+		Alignment = TextAnchor.MiddleCenter,
+		RichText = true,
+	};
+	private static readonly API.Styles.TextStyle ModAuthorsStyle = new()
+	{
+		FontSize = 5,
+		Height = 6f,
+		Color = new Color(0.7f, 0.7f, 0.7f),
+		Alignment = TextAnchor.MiddleCenter,
+		Wrapping = HorizontalWrapMode.Wrap,
+	};
 	private enum ButtonsLayout
 	{
 		SEASON = 0,
@@ -15,6 +30,7 @@ public class MainMenu(MelonLogger.Instance logger)
 
 	public API.Screen MainMenuScreen = new(API.Utils.Scenes.MainMenu);
 	public API.Screen? ModsScreen { get; private set; }
+	public bool IsModsScreenOpen => ModsScreen?.Object != null && ModsScreen.Object.activeInHierarchy;
 
 	public void OnLoad(UserPreferences prefs)
 	{
@@ -35,10 +51,41 @@ public class MainMenu(MelonLogger.Instance logger)
 
 			var viewport = new Viewport(name: "Viewport");
 
-			var testButton = Button.From(API.Utils.Scenes.MainMenu, templateId: "Quit Button", id: "Mods List Button Test 1", text: "LAYUP v0.0.1 - sylvrs");
-			viewport.Add(testButton.Value);
 
-			testButton.Value.Show();
+			foreach (var mod in MelonMod.RegisteredMelons)
+			{
+				var buttonResult = Button.From(API.Utils.Scenes.MainMenu, templateId: "Quit Button", id: $"Mods List Button - {mod.Info.Name}", text: "");
+				if (buttonResult.IsFailed)
+				{
+					logger.Error($"Unable to create a row for {mod.Info.Name}: {buttonResult.Errors[0].Message}");
+					continue;
+				}
+
+				var button = buttonResult.Value;
+				var template = button.Object.GetComponentInChildren<UnityEngine.UI.Text>(true);
+				if (template == null)
+				{
+					logger.Error($"Missing label template for {mod.Info.Name}");
+					Object.Destroy(button.Object);
+					continue;
+				}
+
+				button.Height = 25f;
+				var labels = new VerticalContainer(button.Object)
+				{
+					Padding = new Vector2(12f, 2f),
+					Spacing = 1f,
+					Alignment = TextAnchor.MiddleCenter,
+				};
+				labels.Add(new Label(template,
+					$"{mod.Info.Name} - <color=#FFFF00>v{mod.Info.Version}</color>", ModTitleStyle));
+				labels.Add(new Label(template, mod.Info.Author, ModAuthorsStyle));
+				template.gameObject.SetActive(false);
+
+				button.Show();
+				viewport.Add(button);
+			}
+
 			viewport.Show();
 
 			panel.Add(viewport);
