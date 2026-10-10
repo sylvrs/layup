@@ -20,6 +20,11 @@
 			<Private>false</Private>
 		</Reference>
 
+		<Reference Include="UnityEngine.UI">
+			<HintPath>$(HoopLandDir)\MelonLoader\Il2CppAssemblies\UnityEngine.UI.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+
 		<Reference Include="Il2Cppmscorlib">
 			<HintPath>$(HoopLandDir)\MelonLoader\Il2CppAssemblies\Il2Cppmscorlib.dll</HintPath>
 			<Private>false</Private>
