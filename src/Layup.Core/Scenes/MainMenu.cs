@@ -131,16 +131,10 @@ public class MainMenu(MelonLogger.Instance logger)
 
 	public Result OnOpenModsScreen()
 	{
-		var screen = ModsScreen?.Object;
-		if (screen == null)
-		{
-			return Result.Fail("Missing mods screen");
-		}
-
-		MainMenuScreen.Object.SetActive(false);
-		screen.SetActive(true);
-
-		return Result.Ok();
+		var result = API.Navigation.Open(ModsScreen);
+		if (result.IsFailed)
+			logger.Error($"Unable to open Mods: {result.Errors[0].Message}");
+		return result;
 	}
 
 	public Result OnBackModsScreen()
@@ -151,10 +145,9 @@ public class MainMenu(MelonLogger.Instance logger)
 			return Result.Fail("Missing mods screen");
 		}
 
-		MainMenuScreen.Object.SetActive(true);
-		screen.SetActive(false);
-
-		return Result.Ok();
+		var result = API.Navigation.Open(MainMenuScreen);
+		if (result.IsFailed)
+			logger.Error($"Unable to return to Main Menu: {result.Errors[0].Message}");
+		return result;
 	}
-
 }

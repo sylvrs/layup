@@ -20,6 +20,11 @@
 			<Private>false</Private>
 		</Reference>
 
+		<Reference Include="Assembly-CSharp">
+			<HintPath>$(HoopLandDir)\MelonLoader\Il2CppAssemblies\Assembly-CSharp.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+
 		<Reference Include="UnityEngine.IMGUIModule">
 			<HintPath>$(HoopLandDir)\MelonLoader\Il2CppAssemblies\UnityEngine.IMGUIModule.dll</HintPath>
 			<Private>false</Private>
